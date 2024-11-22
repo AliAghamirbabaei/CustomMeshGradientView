@@ -8,17 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var appear = false
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(lineWidth: 16) // Define the stroke width
+                .foregroundColor(.clear) // Make the stroke clear
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(lineWidth: 0)
+                        .overlay(
+                            CustomMeshGradientView()
+                                .mask(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(lineWidth: 12)
+                                )
+                                .background(Color.black)
+                                .cornerRadius(12)
+                                .blur(radius: 1)
+                        )
+                )
+                .blur(radius: 2)
+                .frame(width: 280, height: 60)
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .ignoresSafeArea()
 }
